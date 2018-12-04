@@ -48,6 +48,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
-        android:text="@string/ACK"
+        android:text="@string/savedkey"
         android:onClick="acknowledge" />
 </RelativeLayout>
