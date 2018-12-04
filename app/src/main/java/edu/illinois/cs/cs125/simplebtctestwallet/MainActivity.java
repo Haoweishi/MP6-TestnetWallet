@@ -10,9 +10,7 @@ import android.widget.Toast;
 import android.content.SharedPreferences;
 
 import org.bitcoinj.core.AddressFormatException;
-import org.bitcoinj.core.Base58;
 
-import java.math.BigInteger;
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREF_NAME = "USER_DATA";
@@ -41,15 +39,19 @@ public class MainActivity extends AppCompatActivity {
     public void useExsistingWallet(View view) {
         EditText savedkeyinput = findViewById(R.id.entryform);
         String str = savedkeyinput.getText().toString();
-        try {
-            str = PrivKeyHelper.wifToPrivKey(str);
-            Toast.makeText(getBaseContext(), "Decoded key: " + str, Toast.LENGTH_LONG).show();
-            SharedPreferences.Editor sharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
-            sharedPref.putString("PRIVKEY", str);
-            sharedPref.commit();
-        } catch (AddressFormatException error) {
-            Log.e("Invalid addr", error.toString());
-            Toast.makeText(getBaseContext(), "Invalid wallet import format!", Toast.LENGTH_LONG).show();
+        if (str == null || str.length() == 0) {
+            Toast.makeText(getBaseContext(), "Form cannot be empty!", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                str = PrivKeyHelper.wifToPrivKey(str);
+                Toast.makeText(getBaseContext(), "Decoded key: " + str, Toast.LENGTH_LONG).show();
+                SharedPreferences.Editor sharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+                sharedPref.putString("PRIVKEY", str);
+                sharedPref.apply();
+            } catch (AddressFormatException error) {
+                Log.e("Invalid addr", error.toString());
+                Toast.makeText(getBaseContext(), "Invalid wallet import format!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
