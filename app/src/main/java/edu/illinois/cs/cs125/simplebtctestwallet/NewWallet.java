@@ -1,9 +1,12 @@
 package edu.illinois.cs.cs125.simplebtctestwallet;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.bitcoinj.core.AddressFormatException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +23,8 @@ public class NewWallet extends AppCompatActivity {
 
     private TextView dynamicPrivKeyLabel;
     private RequestQueue JSONRequestQueue;
+    private String privkey;
+    private String PREF_NAME = "USER_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class NewWallet extends AppCompatActivity {
         try {
             dynamicPrivKeyLabel.setText(response.getString("wif"));
             dynamicPrivKeyLabel.setTextIsSelectable(true);
+            privkey = PrivKeyHelper.wifToPrivKey(response.getString("wif"));
         } catch (JSONException e) {
             Log.e("JSON ERROR", e.toString());
             dynamicPrivKeyLabel.setText("Cannot parse response!");
@@ -69,6 +76,16 @@ public class NewWallet extends AppCompatActivity {
         } catch (Exception error) {
             Log.d("Error:", error.toString());
             dynamicPrivKeyLabel.setText("Key generation server error.");
+        }
+    }
+
+    public void acknowledge(View view) {
+        try {
+            SharedPreferences.Editor sharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+            sharedPref.putString("PRIVKEY", privkey);
+            sharedPref.commit();
+        } catch (AddressFormatException error) {
+            Log.e("Invalid addr", error.toString());
         }
     }
 }

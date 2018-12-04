@@ -7,6 +7,7 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 import org.bitcoinj.core.AddressFormatException;
 import org.bitcoinj.core.Base58;
@@ -14,10 +15,22 @@ import org.bitcoinj.core.Base58;
 import java.math.BigInteger;
 public class MainActivity extends AppCompatActivity {
 
+    private static final String PREF_NAME = "USER_DATA";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences appdata = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        String privkey = appdata.getString("PRIVKEY", null);
+        if (privkey != null) {
+            Log.d("Private key", privkey);
+            Toast.makeText(getBaseContext(), "Stored private key:" + privkey, Toast.LENGTH_LONG).show();
+        }
     }
 
     public void goToNewWallet(View view) {
@@ -29,19 +42,14 @@ public class MainActivity extends AppCompatActivity {
         EditText savedkeyinput = findViewById(R.id.entryform);
         String str = savedkeyinput.getText().toString();
         try {
-            str = wifToPrivKey(str);
+            str = PrivKeyHelper.wifToPrivKey(str);
             Toast.makeText(getBaseContext(), "Decoded key: " + str, Toast.LENGTH_LONG).show();
+            SharedPreferences.Editor sharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+            sharedPref.putString("PRIVKEY", str);
+            sharedPref.commit();
         } catch (AddressFormatException error) {
             Log.e("Invalid addr", error.toString());
             Toast.makeText(getBaseContext(), "Invalid wallet import format!", Toast.LENGTH_LONG).show();
         }
-    }
-
-    private static String wifToPrivKey(String inputWIF) throws AddressFormatException {
-        BigInteger dec = Base58.decodeToBigInteger(inputWIF);
-        String hexstr = dec.toString(16);
-        hexstr = hexstr.substring(0, hexstr.length() - 8);
-        hexstr = hexstr.substring(2, hexstr.length());
-        return hexstr.toUpperCase();
     }
 }
