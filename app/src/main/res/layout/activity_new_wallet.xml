@@ -49,5 +49,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
+<<<<<<< HEAD
         android:text="@string/ACK" />
+=======
+        android:onClick="acknowledge"
+        android:text="I've saved the key" />
+>>>>>>> 4d1e3f7a45914902dcfb25c17199bd67ac6b933e
 </RelativeLayout>
