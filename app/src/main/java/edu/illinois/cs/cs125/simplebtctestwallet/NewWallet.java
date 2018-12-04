@@ -40,45 +40,8 @@ public class NewWallet extends AppCompatActivity {
         requestPrivKey();
     }
 
-    public void parseResult(JSONObject response) {
-        try {
-            dynamicPrivKeyLabel.setText(response.getString("wif"));
-            dynamicPrivKeyLabel.setTextIsSelectable(true);
-            privkey = PrivKeyHelper.wifToPrivKey(response.getString("wif"));
-            Log.d("Reference key", response.getString("private"));
-            Log.d("Reference address", response.getString("address"));
-        } catch (JSONException e) {
-            Log.e("JSON ERROR", e.toString());
-            dynamicPrivKeyLabel.setText("Cannot parse response!");
-        }
-    }
 
     public void requestPrivKey() {
-        /*try {
-            String endpoint = getString(R.string.baseendpoint) + "addrs";
-            JsonObjectRequest requester = new JsonObjectRequest(
-                    Request.Method.POST,
-                    endpoint,
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            parseResult(response);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Error:", error.toString());
-                            dynamicPrivKeyLabel.setText("Key generation server error.");
-                        }
-                    });
-            requester.setShouldCache(false);
-            JSONRequestQueue.add(requester);
-        } catch (Exception error) {
-            Log.d("Error:", error.toString());
-            dynamicPrivKeyLabel.setText("Key generation server error.");
-        }*/
         String newKeyWIF = PrivKeyHelper.generateKeyLocally();
         dynamicPrivKeyLabel.setText(newKeyWIF);
         privkey = PrivKeyHelper.wifToPrivKey(newKeyWIF);

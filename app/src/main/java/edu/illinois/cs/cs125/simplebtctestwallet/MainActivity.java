@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         String privkey = appdata.getString("PRIVKEY", null);
         String address = appdata.getString("ADDR", null);
         if (privkey != null && address != null) {
-            Log.d("Private key", privkey);
-            Log.d("Address", address);
+            Intent gotoMainPage = new Intent(this, SendOrReceive.class);
+            startActivity(gotoMainPage);
         }
     }
 
