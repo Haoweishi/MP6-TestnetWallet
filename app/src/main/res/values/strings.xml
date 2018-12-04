@@ -3,4 +3,5 @@
     <string name="loadWalletLabel">Load Wallet</string>
     <string name="disclaimermessage">DISCLAIMER: The code shown is your private key to your wallet. It is the sole credential to access your Bitcoins. It is generated randomly and will not be shown again in app. The app does not keep a record of users\' private keys on a server and thus there is no way to recover your Bitcoins if the code is lost.</string>
     <string name="newinstructions">Save the code shown below, this will be used to recover your wallet. If prompted, allow internet permissions. The app uses internet to interact with the Bitcoin Blockchain.</string>
+    <string name="baseendpoint">https://api.blockcypher.com/v1/btc/test3/</string>
 </resources>
