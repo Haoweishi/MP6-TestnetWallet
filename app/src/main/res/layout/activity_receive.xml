@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_purple">
+    android:background="@color/colorPrimaryDark">
 
     <ImageView
         android:id="@+id/dynamic_QRCode"
@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
+        android:contentDescription="will be updated with the users QR code"
         app:srcCompat="@android:drawable/ic_secure" />
 
     <TextView
@@ -22,7 +23,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="153dp"
-        android:editable="false"
+        android:background="@android:color/holo_red_dark"
+        android:contentDescription="will be updated with users key"
+        android:textSize="16sp"
         tools:text="1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5m" />
 
 </RelativeLayout>

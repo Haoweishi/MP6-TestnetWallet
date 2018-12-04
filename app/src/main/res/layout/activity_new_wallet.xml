@@ -50,5 +50,4 @@
         android:layout_marginBottom="56dp"
         android:text="@string/ACK"
         android:onClick="acknowledge" />
-
 </RelativeLayout>

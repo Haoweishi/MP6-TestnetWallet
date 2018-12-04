@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_purple">
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/dynamic_txt_amount"
@@ -14,7 +14,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="110dp"
         android:background="@android:color/holo_orange_light"
-        android:editable="false"
         android:paddingTop="25dp"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
@@ -23,14 +22,14 @@
 
     <EditText
         android:id="@+id/editText_sendAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="231dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="182dp"
-        android:editable="true"
+        android:layout_marginBottom="181dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         tools:text="Enter Address" />
 
 </RelativeLayout>

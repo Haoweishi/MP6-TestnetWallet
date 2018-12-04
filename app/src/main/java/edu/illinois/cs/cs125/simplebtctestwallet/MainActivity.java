@@ -11,6 +11,11 @@ import android.content.SharedPreferences;
 
 import org.bitcoinj.core.AddressFormatException;
 
+
+import org.bitcoinj.core.AddressFormatException;
+import org.bitcoinj.core.Base58;
+
+import java.math.BigInteger;
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREF_NAME = "USER_DATA";
