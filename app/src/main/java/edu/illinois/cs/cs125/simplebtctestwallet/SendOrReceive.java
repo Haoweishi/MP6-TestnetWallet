@@ -2,9 +2,11 @@ package edu.illinois.cs.cs125.simplebtctestwallet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +37,7 @@ public class SendOrReceive extends AppCompatActivity {
 
     public void parseResult(JSONObject result) {
         try {
-            long balanceinsatoshi = result.getLong("balance");
+            long balanceinsatoshi = result.getLong("final_balance");
             double balanceinbtc = balanceinsatoshi / 100000000.0;
             TextView displaybar = findViewById(R.id.balanceview);
             displaybar.setText("Balance: " + balanceinbtc + " BTC (TESTNET)");
@@ -70,5 +72,18 @@ public class SendOrReceive extends AppCompatActivity {
             Intent goback = new Intent(this, MainActivity.class);
             startActivity(goback);
         }
+    }
+
+    public void onRefreshButtonClick(View view) {
+        startBalanceRequest();
+    }
+
+    public void openHistory(View view) {
+        String base = "https://live.blockcypher.com/btc-testnet/address/";
+        SharedPreferences appdata = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String address = appdata.getString("ADDR", null);
+        String uri = base + address;
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(browser);
     }
 }
