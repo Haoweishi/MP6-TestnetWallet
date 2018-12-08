@@ -7,7 +7,7 @@
     android:background="@color/colorPrimaryDark">
 
     <TextView
-        android:id="@+id/dynamic_txt_amount"
+        android:id="@+id/amountavail"
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
@@ -22,7 +22,7 @@
 
     <EditText
         android:id="@+id/editText_sendAddress"
-        android:layout_width="231dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -31,5 +31,26 @@
         android:ems="10"
         android:inputType="text"
         tools:text="Enter Address" />
+
+    <Button
+        android:id="@+id/maketransac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="59dp"
+        android:onClick="onSendClick"
+        android:text="Send" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="126dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="Enter Amount" />
 
 </RelativeLayout>

@@ -2,12 +2,12 @@ package edu.illinois.cs.cs125.simplebtctestwallet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +33,9 @@ public class SendOrReceive extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startBalanceRequest();
+        SharedPreferences appdata = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String privkey = appdata.getString("PRIVKEY", null);
+        String address = appdata.getString("ADDR", null);
     }
 
     public void parseResult(JSONObject result) {
@@ -85,5 +88,10 @@ public class SendOrReceive extends AppCompatActivity {
         String uri = base + address;
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(browser);
+    }
+
+    public void gotoSendPage(View view) {
+        Intent sendpage = new Intent(this, send.class);
+        startActivity(sendpage);
     }
 }

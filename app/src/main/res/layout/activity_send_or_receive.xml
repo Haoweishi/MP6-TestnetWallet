@@ -17,7 +17,8 @@
         android:layout_marginRight="135dp"
         android:textSize="24sp"
         android:visibility="visible"
-        tools:text="Send" />
+        tools:text="Send"
+        android:onClick="gotoSendPage"/>
 
     <Button
         android:id="@+id/button_receive"
