@@ -2,10 +2,11 @@ package edu.illinois.cs.cs125.simplebtctestwallet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,9 @@ public class SendOrReceive extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startBalanceRequest();
+        SharedPreferences appdata = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String privkey = appdata.getString("PRIVKEY", null);
+        String address = appdata.getString("ADDR", null);
     }
 
     public void parseResult(JSONObject result) {
@@ -38,7 +42,8 @@ public class SendOrReceive extends AppCompatActivity {
             long balanceinsatoshi = result.getLong("balance");
             double balanceinbtc = balanceinsatoshi / 100000000.0;
             TextView displaybar = findViewById(R.id.balanceview);
-            displaybar.setText("Balance: " + balanceinbtc + " BTC (TESTNET)");
+            String displayed = String.format("%.9f", balanceinsatoshi / 100000000.0);
+            displaybar.setText("Balance: " + displayed + " BTC (TESTNET)");
             Log.d("Balance query","Balance: " + balanceinbtc + " BTC (TESTNET)");
         } catch (JSONException je) {
             Log.e("Error Parsing balance", je.toString());
@@ -70,5 +75,23 @@ public class SendOrReceive extends AppCompatActivity {
             Intent goback = new Intent(this, MainActivity.class);
             startActivity(goback);
         }
+    }
+
+    public void onRefreshButtonClick(View view) {
+        startBalanceRequest();
+    }
+
+    public void openHistory(View view) {
+        String base = "https://live.blockcypher.com/btc-testnet/address/";
+        SharedPreferences appdata = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String address = appdata.getString("ADDR", null);
+        String uri = base + address;
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(browser);
+    }
+
+    public void gotoSendPage(View view) {
+        Intent sendpage = new Intent(this, send.class);
+        startActivity(sendpage);
     }
 }

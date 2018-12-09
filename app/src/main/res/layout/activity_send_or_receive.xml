@@ -17,7 +17,8 @@
         android:layout_marginRight="135dp"
         android:textSize="24sp"
         android:visibility="visible"
-        tools:text="Send" />
+        tools:text="Send"
+        android:onClick="gotoSendPage"/>
 
     <Button
         android:id="@+id/button_receive"
@@ -54,5 +55,25 @@
         android:textSize="36sp"
         android:textStyle="bold"
         tools:text="Choose Action" />
+
+    <Button
+        android:id="@+id/historybutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dp"
+        android:text="View History"
+        android:onClick="openHistory"/>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
+        android:text="Refresh"
+        android:onClick="onRefreshButtonClick"/>
 
 </RelativeLayout>
