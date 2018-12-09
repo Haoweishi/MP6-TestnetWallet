@@ -19,6 +19,7 @@
         <activity android:name=".NewWallet"></activity>
         <activity android:name=".SendOrReceive"></activity>
         <activity android:name=".send"></activity>
+        <activity android:name=".receive"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

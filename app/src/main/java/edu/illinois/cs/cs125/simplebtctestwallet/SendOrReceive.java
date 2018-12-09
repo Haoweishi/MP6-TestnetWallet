@@ -94,4 +94,9 @@ public class SendOrReceive extends AppCompatActivity {
         Intent sendpage = new Intent(this, send.class);
         startActivity(sendpage);
     }
+
+    public void gotoReceivePage (View view) {
+        Intent recv = new Intent(this, receive.class);
+        startActivity(recv);
+    }
 }

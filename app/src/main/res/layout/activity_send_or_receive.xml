@@ -28,6 +28,7 @@
         android:layout_alignRight="@+id/button_send"
         android:layout_alignParentTop="true"
         android:layout_marginTop="225dp"
+        android:onClick="gotoReceivePage"
         android:textSize="24sp"
         android:visibility="visible"
         tools:text="Receive" />
