@@ -15,10 +15,10 @@
         android:layout_marginTop="125dp"
         android:layout_marginEnd="135dp"
         android:layout_marginRight="135dp"
-        android:textSize="24sp"
-        android:visibility="visible"
-        tools:text="Send"
-        android:onClick="gotoSendPage"/>
+        android:onClick="gotoSendPage"
+        android:text="Send"
+        android:textAllCaps="true"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button_receive"
@@ -29,9 +29,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="225dp"
         android:onClick="gotoReceivePage"
-        android:textSize="24sp"
-        android:visibility="visible"
-        tools:text="Receive" />
+        android:text="Receive"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/balanceview"
@@ -52,10 +51,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:lineSpacingExtra="14sp"
-        android:textColor="@android:color/black"
+        android:text="Choose Action"
         android:textSize="36sp"
-        android:textStyle="bold"
-        tools:text="Choose Action" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/historybutton"
