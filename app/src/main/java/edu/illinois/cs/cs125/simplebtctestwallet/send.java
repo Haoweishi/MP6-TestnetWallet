@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.bitcoinj.core.AddressFormatException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -76,22 +77,31 @@ public class send extends AppCompatActivity {
         EditText amount =  findViewById(R.id.amount);
 
         String outputaddress = addressform.getText().toString();
-        int outputSatoshi = (int) (Double.parseDouble(amount.getText().toString()) * 100000000);
+        int outputSatoshi = 0;
+        try {
+            outputSatoshi = (int) (Double.parseDouble(amount.getText().toString()) * 100000000);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this.getApplicationContext(), "Please enter a number", Toast.LENGTH_LONG).show();
+        }
         if (outputSatoshi < 600) {
             Toast.makeText(this.getApplicationContext(), "You cannot send that little!", Toast.LENGTH_LONG).show();
             return;
         }
-        if (outputSatoshi > currentBalance - 10000) {
+        if (outputSatoshi > currentBalance - 5000) {
             Toast.makeText(this.getApplicationContext(), "Insufficient Balance!", Toast.LENGTH_LONG).show();
             return;
         }
         TransactionHelper maker = new TransactionHelper();
-        maker.addOutPut(outputaddress, outputSatoshi);
-        maker.addInput(privkey);
-        if (currentBalance - outputSatoshi > 10000) {
-            maker.addOutPut(address, currentBalance - outputSatoshi - 10000);
+        try {
+            maker.addOutPut(outputaddress, outputSatoshi);
+            maker.addInput(privkey);
+            if (currentBalance - outputSatoshi > 5000) {
+                maker.addOutPut(address, currentBalance - outputSatoshi - 5000);
+            }
+            Log.d("Test req string", maker.requestFrameworkJSON());
+            maker.requestTransactionDetails();
+        } catch (AddressFormatException ae) {
+            Toast.makeText(this.getApplicationContext(), "Invalid destination address!", Toast.LENGTH_LONG).show();
         }
-        Log.d("Test req string", maker.requestFrameworkJSON());
-        maker.requestTransactionDetails();
     }
 }
