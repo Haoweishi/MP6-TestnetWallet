@@ -49,7 +49,7 @@ public class TransactionHelper extends AppCompatActivity {
         pendingOutputs.put(output, amountInSat);
     }
 
-    public String requestFrameworkJSON() {
+    public JSONObject requestFrameworkJSON() {
         JSONObject requestParams = new JSONObject();
         if (pendingInputs.size() == 0 || pendingOutputs.size() == 0) {
             return null;
@@ -84,23 +84,7 @@ public class TransactionHelper extends AppCompatActivity {
             Log.e("JSON PARSE ERROR", e.toString());
         }
         frame = requestParams;
-        return requestParams.toString();
-    }
-
-
-    public void requestTransactionDetails() {
-        String edpoint = "https://api.blockcypher.com/v1/btc/test3/txs/new";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, edpoint, frame, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("Transactionframe", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Network error", error.toString());
-            }
-        });
+        return requestParams;
     }
 
     public void signTransaction() {

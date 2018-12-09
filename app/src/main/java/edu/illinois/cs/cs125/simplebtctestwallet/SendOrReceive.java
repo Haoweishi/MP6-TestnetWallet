@@ -2,7 +2,6 @@ package edu.illinois.cs.cs125.simplebtctestwallet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,10 +39,11 @@ public class SendOrReceive extends AppCompatActivity {
 
     public void parseResult(JSONObject result) {
         try {
-            long balanceinsatoshi = result.getLong("final_balance");
+            long balanceinsatoshi = result.getLong("balance");
             double balanceinbtc = balanceinsatoshi / 100000000.0;
             TextView displaybar = findViewById(R.id.balanceview);
-            displaybar.setText("Balance: " + balanceinbtc + " BTC (TESTNET)");
+            String displayed = String.format("%.9f", balanceinsatoshi / 100000000.0);
+            displaybar.setText("Balance: " + displayed + " BTC (TESTNET)");
             Log.d("Balance query","Balance: " + balanceinbtc + " BTC (TESTNET)");
         } catch (JSONException je) {
             Log.e("Error Parsing balance", je.toString());
