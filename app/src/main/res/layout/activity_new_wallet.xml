@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".NewWallet">
 
     <TextView
@@ -48,6 +49,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
-        android:text="@string/savedkey"
-        android:onClick="acknowledge" />
+        android:onClick="acknowledge"
+        android:text="@string/savedkey" />
 </RelativeLayout>
