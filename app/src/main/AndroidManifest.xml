@@ -20,6 +20,8 @@
         <activity android:name=".SendOrReceive"></activity>
         <activity android:name=".send"></activity>
         <activity android:name=".receive"></activity>
+        <activity android:name=".QRActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 </manifest>

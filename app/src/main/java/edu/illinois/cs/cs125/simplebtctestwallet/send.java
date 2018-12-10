@@ -42,6 +42,11 @@ public class send extends AppCompatActivity {
         address = appdata.getString("ADDR", null);
         queue = Volley.newRequestQueue(this.getApplicationContext());
         startBalanceRequest(address);
+        String presetAddress = getIntent().getStringExtra("SCAN_ADDRESS");
+        if (presetAddress != null) {
+            EditText adressbar = findViewById(R.id.editText_sendAddress);
+            adressbar.setText(presetAddress);
+        }
     }
 
     public void startBalanceRequest(String address) {
@@ -187,5 +192,10 @@ public class send extends AppCompatActivity {
         Toast.makeText(this.getApplicationContext(), "Transaction sent! fee 0.0005", Toast.LENGTH_LONG).show();
         Intent returntohome = new Intent(this, SendOrReceive.class);
         startActivity(returntohome);
+    }
+
+    public void startQRScanner(View view) {
+        Intent start = new Intent(this, QRActivity.class);
+        startActivity(start);
     }
 }

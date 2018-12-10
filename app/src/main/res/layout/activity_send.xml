@@ -20,6 +20,15 @@
         app:fontFamily="sans-serif"
         tools:text="00000.00000 BTC" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan QR Code (Allow camera permission)"
+        android:layout_above="@id/maketransac"
+        android:onClick="startQRScanner"
+        android:id="@+id/qraccess"
+        />
+
     <EditText
         android:id="@+id/editText_sendAddress"
         android:layout_width="match_parent"
