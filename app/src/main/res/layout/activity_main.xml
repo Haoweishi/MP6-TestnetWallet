@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,6 +16,7 @@
         android:layout_marginTop="47dp"
         android:text="@string/loadWalletLabel"
         android:textSize="20pt"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -38,15 +40,15 @@
         android:inputType="textPassword" />
 
     <Button
+        android:id="@+id/LoadButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="183dp"
-        android:text="@string/loadWalletLabel"
-        android:id="@+id/LoadButton"
-        android:onClick="useExsistingWallet"/>
+        android:onClick="useExsistingWallet"
+        android:text="@string/loadWalletLabel" />
 
     <Button
         android:id="@+id/MakeNewWallet"
@@ -56,9 +58,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="23dp"
-        android:text="@string/mknew"
-        android:onClick="goToNewWallet"/>
-
+        android:onClick="goToNewWallet"
+        android:text="@string/mknew" />
 
 
 </RelativeLayout>
