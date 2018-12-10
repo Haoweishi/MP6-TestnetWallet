@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 
 public class send extends AppCompatActivity {
@@ -55,6 +56,9 @@ public class send extends AppCompatActivity {
                     , new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    if (error.networkResponse.statusCode == 400) {
+                        Toast.makeText(getApplicationContext(), "Insufficient balance.", Toast.LENGTH_LONG).show();
+                    }
                     Toast.makeText(getApplicationContext(), "Network error.", Toast.LENGTH_LONG).show();
                     Log.e("Error getting balance", error.toString());
                 }
@@ -68,7 +72,7 @@ public class send extends AppCompatActivity {
 
     public void parseBalResult(JSONObject input) {
         try {
-            int bal = input.getInt("balance");
+            int bal = input.getInt("final_balance");
             currentBalance = bal;
             TextView balfield = findViewById(R.id.amountavail);
             String displayed = String.format("%.9f", currentBalance / 100000000.0);
@@ -79,7 +83,7 @@ public class send extends AppCompatActivity {
     }
 
     public void onSendClick(View view) {
-        int fee = 30000;
+        int fee = 50000;
         EditText addressform = findViewById(R.id.editText_sendAddress);
         EditText amount =  findViewById(R.id.amount);
 
@@ -95,7 +99,7 @@ public class send extends AppCompatActivity {
             return;
         }
         if (outputSatoshi > currentBalance - fee) {
-            Toast.makeText(this.getApplicationContext(), "Insufficient Balance!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(), "Insufficient Balance after fee! Fee: 0.0005 BTC", Toast.LENGTH_LONG).show();
             return;
         }
         TransactionHelper maker = new TransactionHelper();
@@ -122,6 +126,14 @@ public class send extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (error.networkResponse.data != null) {
+                    try {
+                        String str = new String(error.networkResponse.data, "UTF-8");
+                        Log.e("Response error", str);
+                    } catch (UnsupportedEncodingException e) {
+
+                    }
+                }
                 displayNetworkError();
             }
         });
@@ -172,6 +184,7 @@ public class send extends AppCompatActivity {
     }
 
     public void goHome() {
+        Toast.makeText(this.getApplicationContext(), "Transaction sent! fee 0.0005", Toast.LENGTH_LONG).show();
         Intent returntohome = new Intent(this, SendOrReceive.class);
         startActivity(returntohome);
     }

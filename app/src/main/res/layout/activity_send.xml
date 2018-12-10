@@ -27,7 +27,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="181dp"
-        android:autofillHints=""
+        android:hint="Recipient Address"
         android:ems="10"
         android:inputType="text"
         tools:text="Enter Address" />
@@ -51,6 +51,6 @@
         android:layout_marginBottom="126dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Enter Amount" />
+        android:hint="Enter Amount" />
 
 </RelativeLayout>

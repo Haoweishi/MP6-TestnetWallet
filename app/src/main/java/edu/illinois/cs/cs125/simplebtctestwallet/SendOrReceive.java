@@ -32,14 +32,11 @@ public class SendOrReceive extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startBalanceRequest();
-        SharedPreferences appdata = getSharedPreferences("USER_DATA", MODE_PRIVATE);
-        String privkey = appdata.getString("PRIVKEY", null);
-        String address = appdata.getString("ADDR", null);
     }
 
     public void parseResult(JSONObject result) {
         try {
-            long balanceinsatoshi = result.getLong("balance");
+            long balanceinsatoshi = result.getLong("final_balance");
             double balanceinbtc = balanceinsatoshi / 100000000.0;
             TextView displaybar = findViewById(R.id.balanceview);
             String displayed = String.format("%.9f", balanceinsatoshi / 100000000.0);

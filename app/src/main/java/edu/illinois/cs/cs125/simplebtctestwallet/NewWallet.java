@@ -1,5 +1,6 @@
 package edu.illinois.cs.cs125.simplebtctestwallet;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,8 @@ public class NewWallet extends AppCompatActivity {
             String address = PrivKeyHelper.makeAddress(privkey);
             sharedPref.putString("ADDR", address);
             sharedPref.apply();
+            Intent nextpage = new Intent(this, SendOrReceive.class);
+            startActivity(nextpage);
         } catch (AddressFormatException error) {
             Log.e("Invalid addr", error.toString());
         }
