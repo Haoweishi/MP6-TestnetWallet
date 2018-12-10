@@ -34,7 +34,7 @@ public class QRActivity extends AppCompatActivity implements ZXingScannerView.Re
 
     @Override
     public void handleResult(Result raw) {
-        Intent setAddress = new Intent(this, SendOrReceive.class);
+        Intent setAddress = new Intent(this, send.class);
         setAddress.putExtra("SCAN_ADDRESS", raw.getText());
         finish();
         startActivity(setAddress);

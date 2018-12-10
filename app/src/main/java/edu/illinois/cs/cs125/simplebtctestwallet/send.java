@@ -44,6 +44,9 @@ public class send extends AppCompatActivity {
         startBalanceRequest(address);
         String presetAddress = getIntent().getStringExtra("SCAN_ADDRESS");
         if (presetAddress != null) {
+            if (presetAddress.contains("bitcoin")) {
+                presetAddress = presetAddress.substring(8, presetAddress.length());
+            }
             EditText adressbar = findViewById(R.id.editText_sendAddress);
             adressbar.setText(presetAddress);
         }
