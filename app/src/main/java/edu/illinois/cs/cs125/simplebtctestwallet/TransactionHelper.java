@@ -31,7 +31,7 @@ public class TransactionHelper extends AppCompatActivity {
     private Transaction currentTransaction;
     private List<ECKey> pendingInputs;
     private Map<Address, Integer> pendingOutputs;
-    private JSONObject frame;
+    private String change;
 
     public TransactionHelper() {
         currentTransaction = new Transaction(new TestNet3Params());
@@ -64,7 +64,7 @@ public class TransactionHelper extends AppCompatActivity {
                 inputArray.put(inputAddressSequence);
             }
             requestParams.put("inputs", inputArray);
-            requestParams.put("preference", "zero");
+            requestParams.put("preference", "medium");
             JSONArray outputArray = new JSONArray();
             Iterator outputs = pendingOutputs.entrySet().iterator();
             while (outputs.hasNext()) {
@@ -81,11 +81,17 @@ public class TransactionHelper extends AppCompatActivity {
                 outputs.remove();
             }
             requestParams.put("outputs", outputArray);
+            if (change != null) {
+                requestParams.put("change_address", change);
+            }
         } catch (JSONException e) {
-            Log.e("JSON PARSE ERROR", e.toString());
+            Log.e("JSON Input ERROR", e.toString());
         }
-        frame = requestParams;
         return requestParams;
+    }
+
+    public void addChange(String address) {
+        change = address;
     }
 
     public void signTransaction() {

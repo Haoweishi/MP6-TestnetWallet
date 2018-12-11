@@ -115,7 +115,7 @@ public class send extends AppCompatActivity {
             maker.addOutPut(outputaddress, outputSatoshi);
             maker.addInput(privkey);
             if (currentBalance - outputSatoshi > fee) {
-                maker.addOutPut(address, currentBalance - outputSatoshi - fee);
+                maker.addChange(address);
             }
             getFullTransaction(maker.requestFrameworkJSON());
         } catch (AddressFormatException ae) {
