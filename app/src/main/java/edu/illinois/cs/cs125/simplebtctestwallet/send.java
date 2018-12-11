@@ -106,8 +106,8 @@ public class send extends AppCompatActivity {
             Toast.makeText(this.getApplicationContext(), "You cannot send that little!", Toast.LENGTH_LONG).show();
             return;
         }
-        if (outputSatoshi > currentBalance - fee) {
-            Toast.makeText(this.getApplicationContext(), "Insufficient Balance after fee! Fee: 0.0005 BTC", Toast.LENGTH_LONG).show();
+        if (outputSatoshi > currentBalance - 50000) {
+            Toast.makeText(this.getApplicationContext(), "Insufficient Balance after fee (0.0005)", Toast.LENGTH_LONG).show();
             return;
         }
         TransactionHelper maker = new TransactionHelper();

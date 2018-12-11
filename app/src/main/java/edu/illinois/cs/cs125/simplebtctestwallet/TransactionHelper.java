@@ -64,6 +64,7 @@ public class TransactionHelper extends AppCompatActivity {
                 inputArray.put(inputAddressSequence);
             }
             requestParams.put("inputs", inputArray);
+            requestParams.put("preference", "zero");
             JSONArray outputArray = new JSONArray();
             Iterator outputs = pendingOutputs.entrySet().iterator();
             while (outputs.hasNext()) {
